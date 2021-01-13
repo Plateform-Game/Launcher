@@ -72,7 +72,7 @@ namespace Plateform_Launcher
             }
             else
             {
-                MessageBox.Show("Error: No JRE found ! Must install a new or restart your computer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: No JRE found ! Must install a new or restart your computer.\n\nCode: ∅", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.button1.Enabled = true;
                 this.label1.Text = "Status :";
                 this.progressBar1.Style = ProgressBarStyle.Continuous;
