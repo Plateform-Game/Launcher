@@ -20,11 +20,19 @@ namespace Plateform_Launcher
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(string[] args)
         {
             InitializeComponent();
 
             this.button1.Click += Button1_Click;
+
+            if (args.Length == 1 && args[0].StartsWith("game_exited-"))
+            {
+                if (DialogResult.No == MessageBox.Show("The game has exited with code " + args[0].Substring(12) + ". Do you want to reopen launcher ?", "Game exited", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    Environment.Exit(0);
+                }
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -61,7 +69,7 @@ namespace Plateform_Launcher
                     game.WaitForExit();
                     if (lso.Key)
                     {
-                        Process launcher = Process.Start(Application.ExecutablePath);
+                        Process launcher = Process.Start(Application.ExecutablePath, "game_exited-"+game.ExitCode);
                     }
                 }));
                 th.Start(new Duet<bool, Form1>(!this.checkBox1.Checked, this));
